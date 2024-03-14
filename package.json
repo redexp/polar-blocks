@@ -1,0 +1,33 @@
+{
+  "name": "polar-tree",
+  "version": "0.1.0",
+  "description": "Lib for positioning blocks with constraints on polar coordinates",
+  "main": "index.js",
+  "type": "module",
+  "types": "types.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redexp/polar-tree.git"
+  },
+  "keywords": [
+    "polar",
+    "coordinates",
+    "tree",
+    "structure",
+    "dendrogram",
+    "layout",
+    "constraint"
+  ],
+  "author": "Sergii Kliuchnyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redexp/polar-tree/issues"
+  },
+  "homepage": "https://github.com/redexp/polar-tree#readme",
+  "devDependencies": {
+    "express": "^4.18.3"
+  }
+}
