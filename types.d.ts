@@ -2,7 +2,7 @@ declare function polarTree(tree: InputTree | InputTree[], options?: Options): Ou
 
 export default polarTree;
 
-export function alignChildren(root: Block, children: Block[], options?: AlignChildrenOptions): BlocksBySides | AlignChildrenError;
+export function align(root: Block, children: Block[], options?: AlignOptions): AlignResult;
 
 export type InputTree = {
 	children?: InputTree[],
@@ -59,7 +59,7 @@ export type Block = {
 	[prop: string]: any,
 };
 
-export type AlignChildrenOptions = {
+export type AlignOptions = {
 	padding?: number,
 	childrenMargin?: number,
 	left?: boolean | number,
@@ -75,7 +75,9 @@ export type BlocksBySides = {
 	bottom: Block[],
 };
 
-export type AlignChildrenError = {
+export type AlignError = {
 	error: true,
 	type: 'no_space',
 };
+
+export type AlignResult = BlocksBySides | AlignError;
