@@ -60,7 +60,7 @@ export type Block = {
 };
 
 export type AlignOptions = {
-	padding?: number,
+	centerMargin?: number,
 	childrenMargin?: number,
 	left?: boolean | number,
 	right?: boolean | number,
@@ -68,16 +68,36 @@ export type AlignOptions = {
 	bottom?: boolean | number,
 };
 
-export type BlocksBySides = {
-	left: Block[],
-	right: Block[],
-	top: Block[],
-	bottom: Block[],
-};
-
 export type AlignError = {
 	error: true,
 	type: 'no_space',
 };
 
-export type AlignResult = BlocksBySides | AlignError;
+export type AlignResult = Sides | AlignError;
+
+export class Side {
+	blocks: Block[];
+	length: number;
+	blocksLength: number;
+	lengthProp: "width" | "height";
+	width: number;
+	height: number;
+	blockMargin: number;
+
+	getLengthOf(blocks: Block | Block[]): number
+	getNextLengthWith(blocks: Block | Block[]): number
+	canAdd(blocks: Block | Block[]): boolean
+	add(blocks: Block | Block[]): void
+	tryAdd(blocks: Block | Block[]): boolean
+	remove(block: Block | number): Block
+	reset(): void
+}
+
+export type SidesOf<T> = {
+	left: T,
+	right: T,
+	top: T,
+	bottom: T,
+};
+
+export type Sides = SidesOf<Side>;
