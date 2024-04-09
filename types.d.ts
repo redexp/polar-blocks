@@ -1,7 +1,3 @@
-declare function polarTree(tree: InputTree | InputTree[], options?: Options): OutputTree;
-
-export default polarTree;
-
 export function align(root: Block, children: Block[], options?: AlignOptions): AlignResult;
 
 export type InputTree = {
@@ -10,47 +6,7 @@ export type InputTree = {
 	[prop: string]: any,
 };
 
-export type OutputTree = InputTree & {
-	rect: Rect,
-};
-
-export type Rect = {
-	start_deg: number,
-	end_deg: number,
-	deg: number,
-	radius: number,
-	height: number,
-	level: number,
-};
-
-export type Options = {
-	nodeSize?: (node: Node) => Size,
-	defaultNodeHeight?: number,
-	sortChildren?: boolean | ((children: Node[], parent: Node | null) => void),
-};
-
 export type NodeTree = Node[];
-
-export type Node = {
-	rect: Rect,
-
-	// all children in one row
-	children: Node[],
-
-	// children by levels
-	levels: Level[],
-};
-
-export type Level = Rect & {
-	parent: Node,
-
-	children: Node[],
-};
-
-export type Size = {
-	deg: number,
-	height: number,
-};
 
 export type Block = {
 	width: number,
@@ -59,7 +15,20 @@ export type Block = {
 	[prop: string]: any,
 };
 
+export type XY = {
+	x: number,
+	y: number,
+};
+
+export type Rect = Block & XY;
+
+export type Child = Block & {
+	children?: Child[],
+};
+
 export type AlignOptions = {
+	minCenterMargin?: number,
+	maxCenterMargin?: number,
 	centerMargin?: number,
 	childrenMargin?: number,
 	left?: boolean | number,
@@ -70,7 +39,7 @@ export type AlignOptions = {
 
 export type AlignError = {
 	error: true,
-	type: 'no_space',
+	type: 'no_space' | 'max_center_margin',
 };
 
 export type AlignResult = Sides | AlignError;
@@ -101,3 +70,4 @@ export type SidesOf<T> = {
 };
 
 export type Sides = SidesOf<Side>;
+export type SidesXY = SidesOf<XY>;
